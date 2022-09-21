@@ -1,0 +1,257 @@
+---
+title: Introduction
+description: SelfGuard allows you to easily encrypt and tokenize data in a secure and compliant manner.
+---
+
+<Card title="Get Started" icon={duotone("key")} href="https://selfguard.xyz">
+  Request your API-Key at our home page
+</Card>
+
+## Description
+
+SelfGuard takes out the hassle of implementing your own encryption scheme and storage of respective encryption keys. All API calls are logged and the event trail can be viewed by the API Key holder.
+
+## Installation
+
+```bash Terminal
+npm install selfguard-client
+```
+
+## Usage
+
+### Import SelfGuard-Client
+
+```js
+import SelfGuard from "selfguard-client";
+
+// or
+
+let SelfGuard = require("selfguard-client");
+```
+
+### Instantiate
+
+```js
+let sg = new SelfGuard(API_KEY);
+
+// or
+
+let sg = new SelfGuard(API_KEY, PUBLIC_KEY, PRIVATE_KEY);
+
+//This will leverage asymmetric encryption for all stored encryption keys.
+//When encryption keys are sent to SelfGuard they are encrypted using the PUBLIC_KEY.
+//When encryption keys are recieved from SelfGuard they are decrypted using the PRIVATE_KEY.
+```
+
+## Key Pair
+
+### Generate Public Private Key Pair
+
+Allows you to create an RSA or ECSDA key pair.
+
+```js
+let key*pair = sg.createKeyPair('rsa' || 'ecdsa');
+console.log(key_pair);
+/*
+{
+public*key: '-----BEGIN RSA PUBLIC KEY-----\n....',
+private_key: '-----BEGIN RSA PRIVATE KEY-----\n...'
+}
+*/
+```
+
+### Upload Key Pair
+
+Allows you to save this key pair with SelfGuard, encrypted with a password
+
+```js
+await sg.uploadKeyPair(key_pair, "password");
+```
+
+### Get Key Pairs
+
+Allows you to retrieve all encrypted key pairs stored with this account
+
+```js
+let key_pairs = await sg.getKeyPairs();
+
+//decrypt the last uploaded key pair
+let decrypted_key_pair = sg.decryptWithPassword(
+  key_pairs[key_pairs.length - 1].encrypted_private_key,
+  "password"
+);
+```
+
+## Encryption
+
+### Encrypt:
+
+Allows you to encrypt any piece of data and receive the respective encryption key id (the encryption key is stored with SelfGuard) and the encrypted text.
+
+```js
+let { encrypted_text, encryption_key_id } = await sg.encrypt(
+  "This is some super top secret text!"
+);
+
+console.log({ encrypted_text, encryption_key_id });
+// {encrypted_text: '5ac4asffda...... ', encryption_key_id:'e791a8a...'}
+```
+
+### Decrypt:
+
+Allows you to decrypt previously encrypted data by providing the encrypted text and the encryption key id respective to the encrypted data.
+
+```js
+let decryptedText = await sg.decrypt(encrypted_text, encryption_key_id);
+
+console.log(decryptedText);
+// 'This is some super top secret text!'
+```
+
+### Encrypt With Password
+
+Allows you to encrypt any piece of data with a password.
+
+```js
+let ciphertext = sg.encryptWithPassword(
+  "This is some super top secret text!",
+  "password"
+);
+```
+
+### Decrypt With Password:
+
+Allows you to decrypt encrypted data with the respective password.
+
+```js
+let decryptedText = sg.decryptWithPassword(ciphertext, "password");
+
+console.log(decryptedText);
+// 'This is some super top secret text!'
+```
+
+## Data Tokenization
+
+### Tokenize:
+
+Allows you to encrypt data and store the encrypted data with SelfGuard itself.
+
+```js
+let token_id = await sg.tokenize("This is some super top secret text!");
+console.log(token_id);
+// tok_14A...
+```
+
+### Detokenize:
+
+Allows you to retrieve the previously tokenized data by providing the respective token id.
+
+```js
+let data = await sg.detokenize(token_id);
+console.log(data);
+// 'This is some super top secret text!'
+```
+
+## Encrypted Key/Value Storage
+
+### Put:
+
+Allows you to store any key value data where the value is encrypted.
+
+```js
+let success = await sg.put("key", "value");
+```
+
+### Get:
+
+Allows you to retrieve key value data where the value is decrypted upon retrieval
+
+```js
+let value = await sg.get("key");
+
+console.log(value);
+// 'value'
+```
+
+### Get Keys
+
+Allows you to get all the keys (amongst all the key-value objects) stored with this account
+
+```js
+await sg.getKeys();
+```
+
+## Encrypted Array Storage
+
+Used as an encrypted database to store key -> multiple values. Value data is fully encrypted by an encryption key set up at the initiation of the array. Value data can only be decrypted by users who have been assigned access to the encryption key via asymmetric encryption.
+
+### Create Array
+
+```js
+await sg.createArray("name");
+```
+
+### Add To Array
+
+```js
+await sg.addToArray("name", "value");
+await sg.addToArray("name", "value2");
+```
+
+### Add User To Array
+
+```js
+await sg.addUserToArray("name", "0xabc...");
+```
+
+### Get Array
+
+```js
+let data = await sg.getArray("name");
+console.log(data);
+// ['value','value2']
+```
+
+Get Array Names
+
+```js
+let keys = await sg.getArrayNames();
+console.log(keys);
+/_
+[{
+name: 'name',
+length: 2,
+created_at: '2022-09-07T19:58:35.616997+00:00'
+}]
+_/
+```
+
+## Notifications
+
+Used to send texts or emails to addresses who's email and phone number are stored using the encrypted key/value storage. Keys should be stored as
+
+```
+'0x5F9f570eD75b3D8798D6b1309825d26f9B9038D1-profile'
+```
+
+when storing the email and phone number for 0x5F9f570eD75b3D8798D6b1309825d26f9B9038D1.
+
+### Send SMS
+
+```js
+await sg.sendSMS({ address: "0xadfb..", text: "Example Text" });
+```
+
+### Send Email
+
+```js
+await sg.sendEmail({
+  address: "0xadfb..",
+  from: "example@test.com",
+  fromName: "test",
+  replyTo: "reply@test.com",
+  reployToName: "test",
+  subject: "Test Subject",
+  html: "This is the content of the email",
+});
+```

@@ -1,0 +1,57 @@
+{
+  "name": "SelfGuard",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#424054",
+    "light": "#E9E8EC",
+    "dark": "#2B2B2F",
+    "ultraLight": "#F9F9F9",
+    "ultraDark": "#1C1F23"
+  },
+  "topbarLinks": [
+    {
+      "name": "Contact",
+      "url": "mailto:arjun@selfguard.xyz"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Start Encrypting",
+    "url": "https://selfguard.xyz/home"
+  },
+  "anchors": [
+    {
+      "name": "Secure Notifications",
+      "url": "https://demo-notifications.selfguard.xyz",
+      "icon": "bell"
+    },
+    {
+      "name": "Secure Custodionship",
+      "url": "https://demo-custody.selfguard.xyz",
+      "icon": "user-shield"
+    },
+    {
+      "name": "Secure Payments",
+      "url": "https://demo-payments.selfguard.xyz",
+      "icon": "credit-card"
+    },
+    {
+      "name": "Secure File Storage",
+      "url": "https://demo-filestorage.selfguard.xyz",
+      "icon": "file-shield"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Home",
+      "pages": ["introduction", "another-page"]
+    }
+  ],
+  "footerSocials": {
+    "discord": "https://discord.com/invite/b9RR3RCq7X",
+    "twitter": "https://twitter.com/winter_NFTs"
+  }
+}
