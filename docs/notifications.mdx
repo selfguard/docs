@@ -1,0 +1,179 @@
+---
+title: "Notifications"
+description: "This module allows you to send notifications to users while maintaining their privacy."
+---
+
+<Card title="Click Here To Get Started" icon={duotone("bell")} href="https://selfguard.xyz/notifications">
+  Begin By Creating a Notification Group
+</Card>
+<img src="https://getnotified.xyz/step2.png" />
+
+
+## React Component Usage
+This is used to automatically embed a notifications component. Based on the params, it will indicate to the user if they already subscribed or not.
+<img src="/n.png" />
+
+<ParamField path="api_key" required={true} type="string">
+  Your developer API-KEY
+</ParamField>
+
+<ParamField path="collection_name" required={true} type="string">
+  The name of the notification group you created earlier in the Notifiations Dashboard
+</ParamField>
+
+<ParamField path="user_address" required={true} type="string">
+  The user's wallet address or other random identifier
+</ParamField>
+
+<ParamField path="sms_text" required={true} type="string">
+  The SMS that will be sent out when the user signs up
+</ParamField>
+
+<ParamField path="email_subject" required={true} type="string">
+  The subject of the email that will be sent out when the user signs up
+</ParamField>
+
+<ParamField path="email_body" required={true} type="string">
+  The body of the email that will be sent out when the user signs up
+</ParamField>
+
+<ParamField path="onDisabled" required={false} type="function">
+    This function will be called when the user disables notifications
+</ParamField>
+
+<ParamField path="onEnabled" required={false} type="function">
+  This function will be called when the user enables notifications
+</ParamField>
+
+
+
+```jsx
+<Notifications 
+    api_key={api_key} 
+    collection_name={collection_name} 
+    userAddress={userAddress} 
+    sms_text={sms_text}
+    email_subject={email_subject}
+    email_body={email_body}
+    onDisabled={onDisabled}
+    onEnabled={onEnabled}
+/>
+```
+
+
+## Bulk Send
+This allows you to send notifications to all users of a particular notification group.
+
+### Send SMS
+<ParamField path="collection_name" required={true} type="string">
+  The group to which you want to send the notification.
+</ParamField>
+
+<ParamField path="text" required={true} type="string">
+  The content of the sms that will be sent out.
+</ParamField>
+
+```js
+await sg.sendBulkSMS({collection_name,text});
+```
+
+
+
+### Send Email
+
+<ParamField path="collection_name" required={true} type="string">
+  The group to which you want to send the notification.
+</ParamField>
+
+<ParamField path="subject" required={true} type="string">
+  The subject of the email that will be sent out.
+</ParamField>
+
+<ParamField path="body" required={true} type="string">
+  The body of the email that will be sent out.
+</ParamField>
+
+```jsx
+await sg.sendBulkEmail({collection_name, subject, body});
+```
+
+## Individual Send
+This allows you to send individual notifications to your users.
+
+### Send SMS
+
+<ParamField path="user_address" required={true} type="string">
+  The user's wallet address or other random identifier
+</ParamField>
+
+<ParamField path="collection_name" required={true} type="string">
+  The group to which you want to send the notification.
+</ParamField>
+
+<ParamField path="text" required={true} type="string">
+  The content of the sms that will be sent out.
+</ParamField>
+
+```js
+await sg.sendSMS({user_address,collection_name,text});
+```
+
+### Send Email
+
+<ParamField path="user_address" required={true} type="string">
+  The user's wallet address or other random identifier
+</ParamField>
+
+<ParamField path="collection_name" required={true} type="string">
+  The group to which you want to send the notification.
+</ParamField>
+
+<ParamField path="subject" required={true} type="string">
+  The subject of the email that will be sent out.
+</ParamField>
+
+<ParamField path="body" required={true} type="string">
+  The body of the email that will be sent out.
+</ParamField>
+
+```jsx
+await sg.sendEmail({user_address,collection_name, subject, body});
+```
+
+## Notification Group Management
+This allows you to create notifications groups and retrieve them
+
+### Create Notification Group
+```jsx
+await sg.createNotificationGroup({contract_address, collection_name});
+```
+
+### Get Notification Group By Name
+```jsx
+await sg.getNotificationGroupByName({collection_name});
+```
+
+### Get Notification Groups
+```jsx
+await sg.getNotificationGroups();
+```
+
+## Profiles Management
+This allows you to upload profiles manuall to notification groups and retrieve the respective profiles.
+
+### Upload/Update Profile
+```jsx
+await sg.updateProfile({user_address, value, collection_name});
+```
+
+### Get Profile
+```jsx
+await sg.getProfiles({limit, offset, collection_name})
+```
+
+### Get Profiles
+```jsx
+await sg.getProfile({user_address, collection_name});
+```
+
+

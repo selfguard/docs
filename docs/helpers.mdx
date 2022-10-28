@@ -1,0 +1,94 @@
+---
+title: "Helper Functions"
+description: "These functions allow you to use SelfGuard's functions without using SelfGuard as the encryption storage provider."
+---
+
+## Encryption
+These functions allow you to encrypt/decrypt data.
+
+### Encrypt Bytes
+```js
+import {encryptBytes} from "selfguard-client/helpers/encryption.js";
+
+encryptBytes(bytes);
+```
+
+### Decrypt Bytes
+```js
+import {decryptBytes} from "selfguard-client/helpers/encryption.js";
+
+decryptBytes(bytes, encryption_key)
+```
+
+### Encrypt Value
+```js
+import {encryptValue} from "selfguard-client/helpers/encryption.js";
+
+encryptValue(value);
+```
+
+### Decrypt Value
+```js
+import {decryptValue} from "selfguard-client/helpers/encryption.js";
+
+await sg.getArrayNames();
+```
+
+## Files 
+These functions allow you to encrypt/decrypt files, where the encryption keys are stored with Lit Protocol if metamask is enabled in the use of these functions.
+
+### Stream Encrypt Web
+
+```js
+import {streamEncryptWeb} from "selfguard-client/helpers/encryption.js";
+
+await streamEncryptWeb(file, public_key, chunk_function);
+```
+
+### Decrypt Shard
+```js
+import {decryptShard} from "selfguard-client/helpers/encryption.js";
+
+await decryptShard(file, encryption_key, pub_key)
+```
+
+## Metamask
+These functions allow you to perform encryption events with Metamask
+
+### Get Public Key
+```js
+import {getPublicKey} from "selfguard-client/helpers/metamask.js";
+
+await getPublicKey();
+```
+
+### Encrypt Data
+```js
+import {encryptData} from "selfguard-client/helpers/metamask.js";
+
+await encryptData(data,{publicKey,account})
+```
+
+### Decrypt Data
+```js
+import {decryptData} from "selfguard-client/helpers/metamask.js";
+
+await decryptData(account,data);
+```
+
+## Lit Protocol 
+These functions allow you to save and retrieve encryption keys stored with lit protocol.
+
+### Save Lit Encryption Key
+```js
+import {saveLitEncryptionKey} from 'selfguard-client/helpers/lit.js';
+
+await saveLitEncryptionKey(symmetricKey, chain)
+```
+
+### Get Lit Encryption Key
+```js
+import {getLitEncryptionKey} from 'selfguard-client/helpers/lit.js';
+
+await getLitEncryptionKey(encryptedSymmetricKey, chain)
+```

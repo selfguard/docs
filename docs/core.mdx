@@ -1,0 +1,102 @@
+---
+title: "Core Encryption"
+description: "This module offers a multitude of encryption functions"
+---
+
+<Info>If SelfGuard was instantiated with a key pair, it will automatically encrypt data such that only the owner of the key pair will be able to decrypt the data.</Info>
+
+## AES-256 Encryption
+This allows you to encrypt/decrypt any piece of data. Encryption keys are stored with SelfGuard.
+
+### Encrypt (AES-256)
+
+```js
+await sg.encrypt(value);
+```
+
+### Decrypt (AES-256)
+
+```js
+await sg.decrypt(value, encryption_key_id);
+```
+
+## Password Encryption
+This allows you to encrypt/decrypt any piece of data with a password. Nothing is stored with SelfGuard here.
+
+### Encrypt With Password
+
+```js
+sg.encryptWithPassword(value,password);
+```
+
+### Decrypt With Password
+
+```js
+sg.decryptWithPassword(value, password);
+```
+
+## Data Tokenization
+This allows you to encrypt data and store the encrypted data with SelfGuard itself. Each piece of data encrypted will have a respective token id.
+
+### Tokenize
+
+
+```js
+await sg.tokenize(value);
+```
+
+### Detokenize
+
+```js
+await sg.detokenize(token_id);
+```
+
+
+## Encrypted Key/Value Storage
+This allows you to store any key value data where the value is encrypted.
+
+### Put
+
+```js
+await sg.put(key, value);
+```
+
+### Get
+
+```js
+await sg.get(key);
+```
+
+### Get All Keys
+
+```js
+await sg.getKeys();
+```
+
+## Encrypted Array Storage
+
+Used as an encrypted database to store key -> multiple values. Value data is fully encrypted by an encryption key set up at the initiation of the array. Value data can only be decrypted by users who have been assigned access to the encryption key via asymmetric encryption.
+
+### Create Array
+
+```js
+sg.createArray(name);
+```
+
+### Add To Array
+
+```js
+await sg.addToArray(name, value);
+```
+
+### Get Array
+
+```js
+await sg.getArray(name);
+```
+
+### Get Array Names
+
+```js
+await sg.getArrayNames();
+```

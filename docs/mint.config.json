@@ -24,30 +24,25 @@
   },
   "anchors": [
     {
-      "name": "Secure Notifications",
-      "url": "https://demo-notifications.selfguard.xyz",
+      "name": "SelfGuard",
+      "url": "https://selfguard.xyz",
+      "icon": "house"
+    },
+    {
+      "name": "Get Notified",
+      "url": "https://getnotified.xyz",
       "icon": "bell"
     },
     {
-      "name": "Secure Custodionship",
-      "url": "https://demo-custody.selfguard.xyz",
-      "icon": "user-shield"
-    },
-    {
-      "name": "Secure Payments",
-      "url": "https://demo-payments.selfguard.xyz",
-      "icon": "credit-card"
-    },
-    {
-      "name": "Secure File Storage",
+      "name": "File Storage",
       "url": "https://demo-filestorage.selfguard.xyz",
-      "icon": "file-shield"
+      "icon": "user-shield"
     }
   ],
   "navigation": [
     {
       "group": "Home",
-      "pages": ["introduction", "another-page"]
+      "pages": ["introduction","notifications", "file","keypair","core", "helpers"]
     }
   ],
   "footerSocials": {

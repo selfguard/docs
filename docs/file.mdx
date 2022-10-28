@@ -1,0 +1,26 @@
+---
+title: "File Storage"
+description: "This module allows you to store/retrieve files that are automatically encrypted."
+---
+
+<Info>If SelfGuard was instantiated with a key pair, it will automatically encrypt files such that only the owner of the key pair will be able to access the file.</Info>
+
+<Tip>If SelfGuard was instantiated with metamask, it will automatically encrypt files such that only the owner of the metamask account will be able to access the file. Furthermore, it will use <b>Lit Protocol</b> to store the encryption keys, ensuring the encryption keys can only be retrieved by the owner of the respective metamask account. </Tip>
+
+## Encrypt File
+This allows you to encrypt files and upload them to the cloud.
+```js
+await sg.encryptFile(file, callback);
+```
+
+## Decrypt File 
+This allows you to decrypt a file that was uploaded with SelfGuard.
+```js
+await sg.decryptFile(file_id, callback);
+```
+
+## Get Files
+This allows you to get the file names and ids of the uploaded files
+```js
+await sg.getFiles();
+```

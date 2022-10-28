@@ -1,0 +1,28 @@
+---
+title: "Key Pairs / Wallets"
+description: "This module allows you to create, store, and retrieve key pairs"
+---
+
+## Create Key Pair
+
+This allows you to create an RSA or ECSDA key pair.
+
+```js
+sg.createKeyPair(type);
+```
+
+## Upload Key Pair
+
+This allows you to save this key pair with SelfGuard, encrypted with a password
+```js
+await sg.uploadKeyPair(key_pair, password);
+```
+
+## Get Key Pairs
+
+This allows you to retrieve all encrypted key pairs stored with this account. <br/>
+Each pair can be decrypted using the `decryptWithPassword` helper function.
+
+```js
+await sg.getKeyPairs();
+```
