@@ -144,16 +144,27 @@ await sg.sendEmail({user_address,collection_name, subject, body});
 This allows you to create notifications groups and retrieve them
 
 ### Create Notification Group
+<ParamField path="collection_name" required={true} type="string">
+  The name of the notification group
+</ParamField>
+
+<ParamField path="contract_address" type="string">
+  A contract address you would like associated with this group. This will later be used to allow you to token gate users.
+</ParamField>
 ```jsx
-await sg.createNotificationGroup({contract_address, collection_name});
+await sg.createNotificationGroup({collection_name, contract_address});
 ```
 
 ### Get Notification Group By Name
+<ParamField path="collection_name" required={true} type="string">
+  The name of the notification group
+</ParamField>
 ```jsx
 await sg.getNotificationGroupByName({collection_name});
 ```
 
 ### Get Notification Groups
+
 ```jsx
 await sg.getNotificationGroups();
 ```
@@ -162,16 +173,52 @@ await sg.getNotificationGroups();
 This allows you to upload profiles manuall to notification groups and retrieve the respective profiles.
 
 ### Upload/Update Profile
+
+<ParamField path="user_address" required={true} type="string">
+  The address of the user
+</ParamField>
+
+<ParamField path="value" required={true} type="object">
+  An object containing information regarind the user. For uploading notification data regarding a user, set value to `{email, phone}`
+</ParamField>
+
+<ParamField path="collection_name" required={true} type="string">
+  The name of the notification group
+</ParamField>
+
 ```jsx
 await sg.updateProfile({user_address, value, collection_name});
 ```
 
-### Get Profile
+### Get Profiles
+
+<ParamField path="limit" required={true} type="int">
+  The number of profiles you want to retrieve
+</ParamField>
+
+<ParamField path="offset" required={true} type="int">
+  The offset of where to begin retrieving users
+</ParamField>
+
+<ParamField path="collection_name" required={true} type="string">
+  The name of the notification group
+</ParamField>
+
+
 ```jsx
 await sg.getProfiles({limit, offset, collection_name})
 ```
 
-### Get Profiles
+### Get Profile
+
+<ParamField path="user_address" required={true} type="string">
+  The address of the user
+</ParamField>
+
+<ParamField path="collection_name" required={true} type="string">
+  The name of the notification group
+</ParamField>
+
 ```jsx
 await sg.getProfile({user_address, collection_name});
 ```

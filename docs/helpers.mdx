@@ -7,6 +7,9 @@ description: "These functions allow you to use SelfGuard's functions without usi
 These functions allow you to encrypt/decrypt data.
 
 ### Encrypt Bytes
+<ParamField path="bytes" required={true} type="Uint8Array">
+ The byte array that you want to encrypt
+</ParamField>
 ```js
 import {encryptBytes} from "selfguard-client/helpers/encryption.js";
 
@@ -14,13 +17,22 @@ encryptBytes(bytes);
 ```
 
 ### Decrypt Bytes
+<ParamField path="encrypted_bytes" required={true} type="Uint8Array">
+ The byte array returned from `encryptBytes`
+</ParamField>
+<ParamField path="encryption_key" required={true} type="bytes">
+ The encryption key returned from `encryptBytes`
+</ParamField>
 ```js
 import {decryptBytes} from "selfguard-client/helpers/encryption.js";
 
-decryptBytes(bytes, encryption_key)
+decryptBytes(encrypted_bytes, encryption_key)
 ```
 
 ### Encrypt Value
+<ParamField path="value" required={true} type="string">
+ The value that you want to encrypt
+</ParamField>
 ```js
 import {encryptValue} from "selfguard-client/helpers/encryption.js";
 
@@ -28,16 +40,32 @@ encryptValue(value);
 ```
 
 ### Decrypt Value
+<ParamField path="encrypted_value" required={true} type="string">
+ The value that you want to encrypt
+</ParamField>
+<ParamField path="encryption_key" required={true} type="bytes">
+ The encryption key returned from `encryptValue`
+</ParamField>
 ```js
 import {decryptValue} from "selfguard-client/helpers/encryption.js";
 
-await sg.getArrayNames();
+decryptValue(encrypt_value, encryption_key)
 ```
 
 ## Files 
 These functions allow you to encrypt/decrypt files, where the encryption keys are stored with Lit Protocol if metamask is enabled in the use of these functions.
 
 ### Stream Encrypt Web
+
+<ParamField path="file" required={true} type="File">
+ The File you want to encrypt. 
+</ParamField>
+<ParamField path="public_key" required={true} type="string">
+ If this is set to `metamask`, it will save the encryption key with Lit Protocol.
+</ParamField>
+<ParamField path="chunk_function" required={true} type="function">
+ This function is called after each file shard is encrypted with three parameters `encrypted_bytes`, `encryption_key`, and `shard_size`.
+</ParamField>
 
 ```js
 import {streamEncryptWeb} from "selfguard-client/helpers/encryption.js";
@@ -46,10 +74,19 @@ await streamEncryptWeb(file, public_key, chunk_function);
 ```
 
 ### Decrypt Shard
+<ParamField path="file" required={true} type="File">
+ The File you want to decrypt. 
+</ParamField>
+<ParamField path="encryption_key" required={true} type="string">
+ The encryption key for this file shard returned from the chunk_function within `streamEncryptWeb`
+</ParamField>
+<ParamField path="public_key" required={true} type="string">
+ If this is set to `metamask`, it will retrieve the encryption key with Lit Protocol. This meant that the `encryption_key` provided in this function was the encrypted encryption key returned from Lit during `streamEncryptWeb`. 
+</ParamField>
 ```js
 import {decryptShard} from "selfguard-client/helpers/encryption.js";
 
-await decryptShard(file, encryption_key, pub_key)
+await decryptShard(file, encryption_key, public_key)
 ```
 
 ## Metamask
@@ -63,6 +100,16 @@ await getPublicKey();
 ```
 
 ### Encrypt Data
+<ParamField path="account" required={true} type="string">
+ The address of the metamask user.
+</ParamField>
+<ParamField path="publicKey" required={true} type="string">
+ The public key of the metamask user retrieved with `getPublicKey`
+</ParamField>
+<ParamField path="data" required={true} type="object | string">
+ The data you want to decrypt.
+</ParamField>
+
 ```js
 import {encryptData} from "selfguard-client/helpers/metamask.js";
 
@@ -70,6 +117,12 @@ await encryptData(data,{publicKey,account})
 ```
 
 ### Decrypt Data
+<ParamField path="account" required={true} type="string">
+ The address of the metamask user.
+</ParamField>
+<ParamField path="data" required={true} type="object | string">
+ The data you want to decrypt.
+</ParamField>
 ```js
 import {decryptData} from "selfguard-client/helpers/metamask.js";
 
@@ -77,8 +130,14 @@ await decryptData(account,data);
 ```
 
 ## Lit Protocol 
-These functions allow you to save and retrieve encryption keys stored with lit protocol.
+These functions allow you to save and retrieve encryption keys stored with lit protocol. These will automatically trigger `Metamask` to open and sign a condition ensuring the wallet owner is able to retrieve the encryption key.
 
+<ParamField path="symmetricKey" required={true} type="string">
+ The key which you want to save with an access control restriction. Currenty this is based upon the user's wallet ownership.
+</ParamField>
+<ParamField path="chain" required={true} type="string">
+ The chain upon which you want to have the access condition be based on. This wil be leveraged for more complex access controls.
+</ParamField>
 ### Save Lit Encryption Key
 ```js
 import {saveLitEncryptionKey} from 'selfguard-client/helpers/lit.js';
@@ -87,6 +146,12 @@ await saveLitEncryptionKey(symmetricKey, chain)
 ```
 
 ### Get Lit Encryption Key
+<ParamField path="encryptedSymmetricKey" required={true} type="string">
+ The encrypted key retrieved from `saveLitEncryptionKey`
+</ParamField>
+<ParamField path="chain" required={true} type="string">
+ The chain upon which you want to have the access condition be based on. This wil be leveraged for more complex access controls.
+</ParamField>
 ```js
 import {getLitEncryptionKey} from 'selfguard-client/helpers/lit.js';
 

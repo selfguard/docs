@@ -10,12 +10,23 @@ This allows you to encrypt/decrypt any piece of data. Encryption keys are stored
 
 ### Encrypt (AES-256)
 
+<ParamField path="value" required={true} type="object | string">
+ A string or object that you want encrypted.
+</ParamField>
+
 ```js
 await sg.encrypt(value);
 ```
 
 ### Decrypt (AES-256)
 
+<ParamField path="value" required={true} type="object | string">
+ A string or object that you want decrypted.
+</ParamField>
+
+<ParamField path="encryption_key_id" required={true} type="string">
+ The id of the encryption key returned from `sg.encrypt`.
+</ParamField>
 ```js
 await sg.decrypt(value, encryption_key_id);
 ```
@@ -24,13 +35,24 @@ await sg.decrypt(value, encryption_key_id);
 This allows you to encrypt/decrypt any piece of data with a password. Nothing is stored with SelfGuard here.
 
 ### Encrypt With Password
-
+<ParamField path="value" required={true} type="object | string">
+ A string or object that you want encrypted.
+</ParamField>
+<ParamField path="password" required={true} type="password">
+ The password you want to use to encrypt the value.
+</ParamField>
 ```js
 sg.encryptWithPassword(value,password);
 ```
 
 ### Decrypt With Password
 
+<ParamField path="value" required={true} type="object | string">
+ A string or object that you want decrypted.
+</ParamField>
+<ParamField path="password" required={true} type="string">
+ The password you want to use to decrypt the value.
+</ParamField>
 ```js
 sg.decryptWithPassword(value, password);
 ```
@@ -40,13 +62,18 @@ This allows you to encrypt data and store the encrypted data with SelfGuard itse
 
 ### Tokenize
 
-
+<ParamField path="value" required={true} type="object | string">
+ A string or object that you want tokenized.
+</ParamField>
 ```js
 await sg.tokenize(value);
 ```
 
 ### Detokenize
 
+<ParamField path="token_id" required={true} type="string">
+ The token id of the data previously tokenized using `sg.tokenize`
+</ParamField>
 ```js
 await sg.detokenize(token_id);
 ```
@@ -57,12 +84,21 @@ This allows you to store any key value data where the value is encrypted.
 
 ### Put
 
+<ParamField path="key" required={true} type="string">
+ The key with which you want to associate the value.
+</ParamField>
+<ParamField path="value" required={true} type="object | string">
+ A string or object that you want encrypted.
+</ParamField>
 ```js
 await sg.put(key, value);
 ```
 
 ### Get
 
+<ParamField path="key" required={true} type="string">
+ The key with which you want to retrieve the value.
+</ParamField>
 ```js
 await sg.get(key);
 ```
@@ -79,18 +115,30 @@ Used as an encrypted database to store key -> multiple values. Value data is ful
 
 ### Create Array
 
+<ParamField path="name" required={true} type="string">
+ The name of the array you want to create.
+</ParamField>
 ```js
 sg.createArray(name);
 ```
 
 ### Add To Array
 
+<ParamField path="name" required={true} type="string">
+ The name of the array you created.
+</ParamField>
+<ParamField path="value" required={true} type="string">
+ The value that you want to encrypt and add to the array.
+</ParamField>
+
 ```js
 await sg.addToArray(name, value);
 ```
 
 ### Get Array
-
+<ParamField path="name" required={true} type="string">
+ The name of the array you created.
+</ParamField>
 ```js
 await sg.getArray(name);
 ```

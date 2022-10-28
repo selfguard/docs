@@ -6,7 +6,9 @@ description: "This module allows you to create, store, and retrieve key pairs"
 ## Create Key Pair
 
 This allows you to create an RSA or ECSDA key pair.
-
+<ParamField path="type" required={true} type="string">
+  Either `rsa` or `ecsda`
+</ParamField>
 ```js
 sg.createKeyPair(type);
 ```
@@ -14,13 +16,19 @@ sg.createKeyPair(type);
 ## Upload Key Pair
 
 This allows you to save this key pair with SelfGuard, encrypted with a password
+<ParamField path="key_pair" required={true} type="object">
+  The key pair object created in the `createKeyPair` method.
+</ParamField>
+<ParamField path="password" required={true} type="string">
+  A password that will be used to encrypt the private key.
+</ParamField>
 ```js
 await sg.uploadKeyPair(key_pair, password);
 ```
 
 ## Get Key Pairs
 
-This allows you to retrieve all encrypted key pairs stored with this account. <br/>
+This allows you to retrieve all encrypted key pairs stored with this account.
 Each pair can be decrypted using the `decryptWithPassword` helper function.
 
 ```js

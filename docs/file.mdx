@@ -9,12 +9,27 @@ description: "This module allows you to store/retrieve files that are automatica
 
 ## Encrypt File
 This allows you to encrypt files and upload them to the cloud.
+<ParamField path="file" required={true} type="File | string">
+  If `sg` was instantiated with `selfguard-client` then `file` will be a javascript web File object. <br/>
+  If `sg` was instantiated with `selfguard-node` then `file` will be the file_path of the file. 
+</ParamField>
+
+<ParamField path="callback" required={true} type="function">
+  callback function that will be called with two paramaters `err` and `value` where `value` will equal the progress of the file upload & encryption.
+</ParamField>
 ```js
 await sg.encryptFile(file, callback);
 ```
 
 ## Decrypt File 
 This allows you to decrypt a file that was uploaded with SelfGuard.
+<ParamField path="file_id" required={true} type="string">
+  The id of the file that was encrypted.
+</ParamField>
+
+<ParamField path="callback" required={true} type="function">
+  callback function that will be called with two paramaters `err` and `value` where `value` will equal the progress of the file download & decryption.
+</ParamField>
 ```js
 await sg.decryptFile(file_id, callback);
 ```
