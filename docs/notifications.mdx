@@ -25,18 +25,6 @@ This is used to automatically embed a notifications component. Based on the para
   The user's wallet address or other random identifier
 </ParamField>
 
-<ParamField path="sms_text" required={true} type="string">
-  The SMS that will be sent out when the user signs up
-</ParamField>
-
-<ParamField path="email_subject" required={true} type="string">
-  The subject of the email that will be sent out when the user signs up
-</ParamField>
-
-<ParamField path="email_body" required={true} type="string">
-  The body of the email that will be sent out when the user signs up
-</ParamField>
-
 <ParamField path="onDisabled" required={false} type="function">
     This function will be called when the user disables notifications
 </ParamField>
@@ -51,10 +39,7 @@ This is used to automatically embed a notifications component. Based on the para
 <Notifications 
     api_key={api_key} 
     collection_name={collection_name} 
-    userAddress={userAddress} 
-    sms_text={sms_text}
-    email_subject={email_subject}
-    email_body={email_body}
+    userAddress={userAddress}
     onDisabled={onDisabled}
     onEnabled={onEnabled}
 />
