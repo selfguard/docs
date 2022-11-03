@@ -57,12 +57,26 @@ This instantiates SelfGuard such that data with SelfGuard can be decrypted with 
 let sg = new SelfGuard(API_KEY);
 ```
 
+
+<Tip>If SelfGuard is instantiated with an `ecdsa` key pair, it will automatically store the encryption keys with <a href='https://litprotocol.com/' target="_blank" rel="noopener noreferrer">Lit Protocol</a> such that only the owner of the metamask account will be able to access them.</Tip>
 ### With Asymmetric Encryption (Key Pair)
 This instantiates SelfGuard such that data encrypted with SelfGuard can only be decrypted by the user with the respective public/private key pair.
+<ParamField path="key_pair_type" required={true} type="string">
+  The key pair type that can either be `ecdsa` or `rsa`
+</ParamField>
+<ParamField path="public_key" required={true} type="string">
+  The public key of the user, which can be generated using `sg.createKeyPair('rsa' || 'ecdsa')`;
+</ParamField>
+<ParamField path="private_key" required={true} type="string">
+  The private key of the user, which can be generated using `sg.createKeyPair('rsa' || 'ecdsa')`;
+</ParamField>
+
 ```js
-let sg = new SelfGuard(API_KEY, PUBLIC_KEY, PRIVATE_KEY);
+let sg = new SelfGuard(API_KEY, key_pair_type, public_key, private_key);
 ```
 
+
+<Tip>If SelfGuard is instantiated with metamask, it will automatically store the encryption keys with <a href='https://litprotocol.com/' target="_blank" rel="noopener noreferrer">Lit Protocol</a> such that only the owner of the metamask account will be able to access them.</Tip>
 ### With Asymmetric Encryption (Metamask)
 This instantiates SelfGuard such that data encrypted with SelfGuard can only be decrypted by the end user's metamask's account.
 <br/>
