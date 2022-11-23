@@ -6,8 +6,6 @@ description: "This module allows you to send notifications to users while mainta
 <Card title="Click Here To Get Started" icon={duotone("bell")} href="https://selfguard.xyz/notifications">
   Begin By Creating a Notification Group
 </Card>
-<img src="https://getnotified.xyz/step2.png" />
-
 
 ## React Component Usage
 This is used to automatically embed a notifications component. Based on the params, it will indicate to the user if they already subscribed or not.
@@ -17,12 +15,20 @@ This is used to automatically embed a notifications component. Based on the para
   Your developer API-KEY
 </ParamField>
 
-<ParamField path="collection_name" required={true} type="string">
-  The name of the notification group you created earlier in the Notifiations Dashboard
+<ParamField path="notification_group" required={true} type="string">
+  The name of the notification group you created earlier in the <a href='https://selfguard.xyz/notifications'>Notifiations Dashboard</a>
 </ParamField>
 
 <ParamField path="user_address" required={true} type="string">
   The user's wallet address or other random identifier
+</ParamField>
+
+<ParamField path="size" required={true} type="string">
+  The size of the button - 'small' or 'large'
+</ParamField>
+
+<ParamField path="color" required={true} type="string">
+  The color of the button
 </ParamField>
 
 <ParamField path="onDisabled" required={false} type="function">
@@ -34,12 +40,15 @@ This is used to automatically embed a notifications component. Based on the para
 </ParamField>
 
 
-
 ```jsx
-<Notifications 
+import {NotificationsButton} from "selfguard-react-components";
+
+<NotificationsButton
     api_key={api_key} 
-    collection_name={collection_name} 
+    notification_group={notification_group} 
     user_address={user_address}
+    size={size}
+    color={color}
     onDisabled={onDisabled}
     onEnabled={onEnabled}
 />
