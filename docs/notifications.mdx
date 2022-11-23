@@ -23,12 +23,16 @@ This is used to automatically embed a notifications component. Based on the para
   The user's wallet address or other random identifier
 </ParamField>
 
-<ParamField path="size" required={true} type="string">
+<ParamField path="size" required={false} type="string">
   The size of the button - 'small' or 'large'
 </ParamField>
 
-<ParamField path="color" required={true} type="string">
-  The color of the button
+<ParamField path="background" required={false} type="string">
+  The background of the button - 'black' or 'white'
+</ParamField>
+
+<ParamField path="color" required={false} type="string">
+  The color of the button text/icon
 </ParamField>
 
 <ParamField path="onDisabled" required={false} type="function">
@@ -47,6 +51,7 @@ import {NotificationsButton} from "selfguard-react-components";
     api_key={api_key} 
     notification_group={notification_group} 
     user_address={user_address}
+    background={background}
     size={size}
     color={color}
     onDisabled={onDisabled}
