@@ -64,7 +64,7 @@ import {NotificationsButton} from "selfguard-react-components";
 This allows you to send notifications to all users of a particular notification group.
 
 ### Send SMS
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The group to which you want to send the notification.
 </ParamField>
 
@@ -73,14 +73,14 @@ This allows you to send notifications to all users of a particular notification 
 </ParamField>
 
 ```js
-await sg.sendBulkSMS({collection_name,text});
+await sg.sendBulkSMS({notification_group,text});
 ```
 
 
 
 ### Send Email
 
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The group to which you want to send the notification.
 </ParamField>
 
@@ -93,7 +93,7 @@ await sg.sendBulkSMS({collection_name,text});
 </ParamField>
 
 ```jsx
-await sg.sendBulkEmail({collection_name, subject, body});
+await sg.sendBulkEmail({notification_group, subject, body});
 ```
 
 ## Individual Send
@@ -105,7 +105,7 @@ This allows you to send individual notifications to your users.
   The user's wallet address or other random identifier
 </ParamField>
 
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The group to which you want to send the notification.
 </ParamField>
 
@@ -114,7 +114,7 @@ This allows you to send individual notifications to your users.
 </ParamField>
 
 ```js
-await sg.sendSMS({user_address,collection_name,text});
+await sg.sendSMS({user_address,notification_group,text});
 ```
 
 ### Send Email
@@ -123,7 +123,7 @@ await sg.sendSMS({user_address,collection_name,text});
   The user's wallet address or other random identifier
 </ParamField>
 
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The group to which you want to send the notification.
 </ParamField>
 
@@ -136,14 +136,14 @@ await sg.sendSMS({user_address,collection_name,text});
 </ParamField>
 
 ```jsx
-await sg.sendEmail({user_address,collection_name, subject, body});
+await sg.sendEmail({user_address,notification_group, subject, body});
 ```
 
 ## Notification Group Management
 This allows you to create notifications groups and retrieve them
 
 ### Create Notification Group
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The name of the notification group
 </ParamField>
 
@@ -151,15 +151,15 @@ This allows you to create notifications groups and retrieve them
   A contract address you would like associated with this group. This will later be used to allow you to token gate users.
 </ParamField>
 ```jsx
-await sg.createNotificationGroup({collection_name, contract_address});
+await sg.createNotificationGroup({notification_group, contract_address});
 ```
 
 ### Get Notification Group By Name
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The name of the notification group
 </ParamField>
 ```jsx
-await sg.getNotificationGroupByName({collection_name});
+await sg.getNotificationGroupByName({notification_group});
 ```
 
 ### Get Notification Groups
@@ -181,12 +181,12 @@ This allows you to upload profiles manuall to notification groups and retrieve t
   An object containing information regarind the user. For uploading notification data regarding a user, set value to `{email, phone}`
 </ParamField>
 
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The name of the notification group
 </ParamField>
 
 ```jsx
-await sg.updateProfile({user_address, value, collection_name});
+await sg.updateProfile({user_address, value, notification_group});
 ```
 
 ### Get Profiles
@@ -199,13 +199,13 @@ await sg.updateProfile({user_address, value, collection_name});
   The offset of where to begin retrieving users
 </ParamField>
 
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The name of the notification group
 </ParamField>
 
 
 ```jsx
-await sg.getProfiles({limit, offset, collection_name})
+await sg.getProfiles({limit, offset, notification_group})
 ```
 
 ### Get Profile
@@ -214,12 +214,12 @@ await sg.getProfiles({limit, offset, collection_name})
   The address of the user
 </ParamField>
 
-<ParamField path="collection_name" required={true} type="string">
+<ParamField path="notification_group" required={true} type="string">
   The name of the notification group
 </ParamField>
 
 ```jsx
-await sg.getProfile({user_address, collection_name});
+await sg.getProfile({user_address, notification_group});
 ```
 
 
